@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户登录</title>
+</head>
+<body>
+<form action="/login" method="post">
+    <input style="display: block;margin: auto;margin-top:50px " name="username" type="text" placeholder="用户名">
+    <input style="display: block;margin: auto;" type="password" name="password" placeholder="密码">
+    <div style="margin: auto;text-align: center">
+        <input style="margin-left: 97px" type="text" name="enter" placeholder="验证码"><img id="code" src="/getCode"
+                                                                                         alt="验证码"/><br>
+    </div>
+    <input style="display: block;text-align: center;margin: auto;" type="submit" id="tj" value="登录"/>
+</form>
+</body>
+</html>
