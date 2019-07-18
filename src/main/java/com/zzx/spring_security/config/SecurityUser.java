@@ -26,13 +26,14 @@ public class SecurityUser extends User implements UserDetails {
             this.setTelephone(user.getTelephone());
             this.setLastIp(user.getLastIp());
             this.setLastTime(user.getLastTime());
+            this.setRoles(user.getRoles());
         }
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> authorities = new ArrayList<>();
-        List<Role> roles = dao.getrole(this.getUsername());
+        List<Role> roles = this.getRoles();
         if (roles.size()>0) {
             for (Role role: roles
                  ) {

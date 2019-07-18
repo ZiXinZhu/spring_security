@@ -1,5 +1,6 @@
 package com.zzx.spring_security.config;
 
+import com.zzx.spring_security.bo.Role;
 import com.zzx.spring_security.bo.User;
 import com.zzx.spring_security.dao.SecurityDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -107,6 +109,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             @Override
             public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
                 User userBO = dao.getOne(username);
+                List<Role> roles=dao.getrole(username);
+                userBO.setRoles(roles);
                 return new SecurityUser(userBO);
             }
         };
