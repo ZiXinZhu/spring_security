@@ -4,9 +4,9 @@ package com.zzx.spring_security.bo;
 import lombok.Data;
 
 @Data
-public class Role {
+public class Permission {
 
     private int id;
     private String username;
-    private String name;
+    private int userPermission;
 }

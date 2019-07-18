@@ -1,7 +1,6 @@
 package com.zzx.spring_security.server;
 
 
-import com.zzx.spring_security.bo.UserBO;
 import com.zzx.spring_security.dao.SecurityDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,13 +10,27 @@ public class SecurityServer {
     @Autowired
     SecurityDao dao;
 
-    public int add(String username,String password,String telephone,String role){
-        int add=dao.add(username,password,telephone,role);
+    public int add(String username,String password,String telephone){
+        int add=dao.add(username,password,telephone);
         if(add==1){
             return 1;
         }else {
             return 0;
         }
+
+    }
+
+    public int addrole(String username,String name){
+        int addrole=dao.addrole(username,name);
+        if(addrole==1) return 1;
+        else return 0;
+
+    }
+
+    public int addPermission(String username,int userPermission){
+        int addPermission=dao.addrPermission(username,userPermission);
+        if(addPermission==1) return 1;
+        else return 0;
 
     }
 

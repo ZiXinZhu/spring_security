@@ -1,6 +1,6 @@
 package com.zzx.spring_security.config;
 
-import com.zzx.spring_security.bo.UserBO;
+import com.zzx.spring_security.bo.User;
 import com.zzx.spring_security.dao.SecurityDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -68,7 +68,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new SavedRequestAwareAuthenticationSuccessHandler() {
             @Override
             public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-                UserBO userDetails = (UserBO) authentication.getPrincipal();
+                User userDetails = (User) authentication.getPrincipal();
                 logger.info("USER : " + userDetails.getUsername() + " LOGIN SUCCESS !  ");
                 super.onAuthenticationSuccess(request, response, authentication);
             }
@@ -106,7 +106,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
             @Override
             public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-                UserBO userBO = dao.getOne(username);
+                User userBO = dao.getOne(username);
                 return new SecurityUser(userBO);
             }
         };

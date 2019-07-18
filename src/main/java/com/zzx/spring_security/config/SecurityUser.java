@@ -1,25 +1,29 @@
 package com.zzx.spring_security.config;
 
-import com.zzx.spring_security.bo.UserBO;
+import com.zzx.spring_security.bo.Role;
+import com.zzx.spring_security.bo.User;
+import com.zzx.spring_security.dao.SecurityDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
-public class SecurityUser extends UserBO implements UserDetails {
+public class SecurityUser extends User implements UserDetails {
 
+    @Autowired
+    SecurityDao dao;
 
-    public SecurityUser(UserBO user) {
+    public SecurityUser(User user) {
         if (user != null) {
             this.setUserUuid(user.getUserUuid());
             this.setUsername(user.getUsername());
             this.setPassword(user.getPassword());
             this.setEmail(user.getEmail());
             this.setTelephone(user.getTelephone());
-            this.setRole(user.getRole());
-            this.setPermission(user.getPermission());
             this.setLastIp(user.getLastIp());
             this.setLastTime(user.getLastTime());
         }
@@ -28,10 +32,12 @@ public class SecurityUser extends UserBO implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> authorities = new ArrayList<>();
-        String role = this.getRole();
-        if (role != null) {
-            SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role);
-            authorities.add(authority);
+        List<Role> roles = dao.getrole(this.getUsername());
+        if (roles.size()>0) {
+            for (Role role: roles
+                 ) {
+                authorities.add(new SimpleGrantedAuthority(role.getName()));
+            }
         }
         return authorities;
     }
