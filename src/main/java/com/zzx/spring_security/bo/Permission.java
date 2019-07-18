@@ -7,6 +7,7 @@ import lombok.Data;
 public class Permission {
 
     private int id;
-    private String username;
-    private int userPermission;
+    private String name;
+    private String role;
+    private String url;
 }

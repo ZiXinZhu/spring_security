@@ -57,7 +57,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 and().logout().permitAll().invalidateHttpSession(true).deleteCookies("JSESSIONID").
                 and().rememberMe().
                 and().sessionManagement().maximumSessions(10).expiredUrl("/login");
-//        http.csrf().disable();
         http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
     }
 

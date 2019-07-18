@@ -1,6 +1,7 @@
 package com.zzx.spring_security.dao;
 
 
+import com.zzx.spring_security.bo.Permission;
 import com.zzx.spring_security.bo.Role;
 import com.zzx.spring_security.bo.User;
 import org.apache.ibatis.annotations.Insert;
@@ -25,14 +26,24 @@ public interface SecurityDao {
     int addrole(@Param("username")String  username,
                 @Param("name")String  name);
 
-    @Insert("INSERT INTO permission (username,user_permission) values (#{username},#{userPermission})")
-    int addrPermission(@Param("username")String  username,
-                @Param("userPermission")int  userPermission);
+    @Insert("INSERT INTO permission (name,role,url) values (#{name},#{role},#{url})")
+    int addrPermission(@Param("name")String  name,
+                       @Param("role")String  role,
+                       @Param("url")String  url);
 
     @Select("SELECT * from user where username=#{username}")
     User getOne(@Param("username")String  username);
 
     @Select("SELECT * FROM role where username=#{username}")
     List<Role>  getrole(@Param("username")String  username);
+
+    @Select("Select * from permission")
+    List<Permission> allPermission();
+
+    @Select("Select role from permission where url=#{url}")
+    List<String>  allrole(@Param("url")String  url);
+
+    @Select("SELECT count(username) FROM user where username=#{username}")
+    int getusername(@Param("username")String  username);
 
 }

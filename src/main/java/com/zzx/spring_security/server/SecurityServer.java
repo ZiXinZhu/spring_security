@@ -27,8 +27,8 @@ public class SecurityServer {
 
     }
 
-    public int addPermission(String username,int userPermission){
-        int addPermission=dao.addrPermission(username,userPermission);
+    public int addPermission(String name,String role,String url){
+        int addPermission=dao.addrPermission(name,role,url);
         if(addPermission==1) return 1;
         else return 0;
 
