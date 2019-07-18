@@ -19,7 +19,7 @@ public class SecurityUser extends UserBO implements UserDetails {
             this.setEmail(user.getEmail());
             this.setTelephone(user.getTelephone());
             this.setRole(user.getRole());
-            this.setImage(user.getImage());
+            this.setPermission(user.getPermission());
             this.setLastIp(user.getLastIp());
             this.setLastTime(user.getLastTime());
         }
@@ -28,9 +28,9 @@ public class SecurityUser extends UserBO implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> authorities = new ArrayList<>();
-        String username = this.getUsername();
-        if (username != null) {
-            SimpleGrantedAuthority authority = new SimpleGrantedAuthority(username);
+        String role = this.getRole();
+        if (role != null) {
+            SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role);
             authorities.add(authority);
         }
         return authorities;

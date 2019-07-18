@@ -43,7 +43,7 @@ public class SecurityController {
     }
 
     @RequestMapping("/register")
-    public String add(String username,String password,String telephone,int role){
+    public String add(String username,String password,String telephone,String  role){
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(4);
         password=encoder.encode(password);
         int i=server.add(username,password,telephone,role);

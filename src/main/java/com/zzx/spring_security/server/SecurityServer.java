@@ -11,7 +11,7 @@ public class SecurityServer {
     @Autowired
     SecurityDao dao;
 
-    public int add(String username,String password,String telephone,int role){
+    public int add(String username,String password,String telephone,String role){
         int add=dao.add(username,password,telephone,role);
         if(add==1){
             return 1;
